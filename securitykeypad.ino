@@ -1,3 +1,4 @@
+//libraries
 #include <Servo.h>
 #include <LiquidCrystal.h>
 #include <Keypad.h>
@@ -22,7 +23,7 @@ byte rowPins[rows]={5,4,3,2};
 byte colPins[cols]={6,7,8};
 Keypad keypad= Keypad(makeKeymap(key),rowPins,colPins,rows,cols);
 
-//globalni
+//global variables
 String password="";
 String code="";
 int waitTime=1;
@@ -31,7 +32,7 @@ bool access=false;
 int keySignal;
 int closeSignal;
 
-//inicijalizacija
+//initialization
 void setup()
 {
   readpass();
@@ -45,7 +46,7 @@ void setup()
   welcome();
 }
 
-//glava jamka
+//main loop
 void loop()
 {
   if(code==""&&!access)
@@ -60,7 +61,7 @@ void loop()
   if (key!=NO_KEY){
     code+=key;
   }
-  
+  //trigger reset password sequence
   if(key=='*')
   {
     reset=true;
@@ -119,7 +120,7 @@ void loop()
   }
 }
 
-//poceten ekran
+//welcome screen
 void welcome()
 {
   lcd.setCursor(0,0);
@@ -127,7 +128,7 @@ void welcome()
   lcd.print(password);
 }
 
-//citaj lozinka
+//read password from ROM
 void readpass()
 {
   password="";
@@ -139,7 +140,7 @@ void readpass()
   }
 }
 
-//reset za lozinka
+//reset password
 void passwordreset()
 {
   if(code.length()==6)
@@ -166,7 +167,7 @@ void passwordreset()
   }
 }
 
-//proverka za lozinka
+//check password
 int passwordcheck(String localpass)
 {
   lcd.clear();
@@ -175,14 +176,14 @@ int passwordcheck(String localpass)
   lcd.setCursor(7,0);
   lcd.print(" ");
   lcd.setCursor(7,1);
-  //pisuvaj dzvezdi
+  //print stars on input
   for(int l=0;l<code.length();l++)
   {
     lcd.print("*");
   }
   lcd.setCursor(10,0);
   lcd.print(code);
-  //porverka za lozinka
+  //check password
   if (password.length()==localpass.length())
   {
     if(password==localpass)
@@ -204,7 +205,7 @@ int passwordcheck(String localpass)
   }
 }
 
-//odkluci
+//unlock
 void unlockdoor()
 {
   lcd.clear();
@@ -218,7 +219,7 @@ void unlockdoor()
   lcd.print("UNLOCKED");
 }
 
-//zakluci
+//lock
 void lockdoor()
 {
   lcd.clear();
@@ -231,7 +232,7 @@ void lockdoor()
   welcome();
 }
 
-//pogresen vnes
+//wrong input
 void incorrect()
 {
   lcd.clear();
