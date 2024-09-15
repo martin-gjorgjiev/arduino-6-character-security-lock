@@ -23,6 +23,8 @@ Connect the two switches to 5v and ground, using a pull down resistor provide th
 Pin VSS of the LM017L display gets connected to ground, while pin VDD to 5v. Connect the VEE/VO pin with potentiometer between 5v and ground, which is used to control the contrast.
 Pin RS (Register Select) and E (Enable) get connected to pins A0 and A1 on arduino, while pin RW gets grounded which sets it in write mode.
 4 bit transfer is being used so D4-7 pins on the display are connected to A2-A5 on arduino. If you want you can wire additional light on pin D13 to replace the builtin LED light.
+![Left side of the schematic](https://github.com/martin-gjorgjiev/arduino-6-character-security-lock/blob/main/schematic_left.png)
+![Right side of the schematic](https://github.com/martin-gjorgjiev/arduino-6-character-security-lock/blob/main/schematic_right.png)
 
 ## Usage
 The keys 0-9 are used for normal character input, after input of 6 characters the code checks if the password matches.
